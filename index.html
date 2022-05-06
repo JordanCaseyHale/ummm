@@ -5,19 +5,70 @@
   <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body style="margin:0px; overflow:hidden;">
   <a-scene embedded arjs="trackingMethod: best;" renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" id="scene">
     <a-marker type="pattern" url="./pattern-Graph 3.patt" id="marker3">
-      <a-entity geometry="primitive: box" material="shader: html; target: #htmlElement"></a-entity>
+      <a-entity geometry="primitive: box" material="shader: html; target: #myPlot"></a-entity>
     </a-marker>
     
     <a-entity camera></a-entity>
   </a-scene>
 
   <div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: -2; overflow: hidden">
-    <div id="htmlElement" style="background: #F8F8F8; color: #333; font-size: 48px">Hello, HTML!</div>
+    <!--<div id="htmlElement" style="background: #F8F8F8; color: #333; font-size: 48px">Hello, HTML!</div>-->
+    <svg id="myPlot" style="width:500px;height:500px"></svg>
   </div>
+  
+  <script>
+    // Set Dimensions
+    const xSize = 500; 
+    const ySize = 500;
+    const margin = 40;
+    const xMax = xSize - margin*2;
+    const yMax = ySize - margin*2;
+
+    // Create Random Points
+    const numPoints = 100;
+    const data = [];
+    for (let i = 0; i < numPoints; i++) {
+      data.push([Math.random() * xMax, Math.random() * yMax]);
+    }
+
+    // Append SVG Object to the Page
+    const svg = d3.select("#myPlot")
+      .append("svg")
+      .append("g")
+      .attr("transform","translate(" + margin + "," + margin + ")");
+
+    // X Axis
+    const x = d3.scaleLinear()
+      .domain([0, 500])
+      .range([0, xMax]);
+
+    svg.append("g")
+      .attr("transform", "translate(0," + yMax + ")")
+      .call(d3.axisBottom(x));
+
+    // Y Axis
+    const y = d3.scaleLinear()
+      .domain([0, 500])
+      .range([ yMax, 0]);
+
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // Dots
+    svg.append('g')
+      .selectAll("dot")
+      .data(data).enter()
+      .append("circle")
+      .attr("cx", function (d) { return d[0] } )
+      .attr("cy", function (d) { return d[1] } )
+      .attr("r", 3)
+      .style("fill", "Red");
+  </script>
 </body>
 </html>
