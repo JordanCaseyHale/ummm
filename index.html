@@ -11,7 +11,7 @@
 <body style="margin:0px; overflow:hidden;">
   <a-scene embedded arjs="trackingMethod: best;" renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" id="scene">
     <a-marker type="pattern" url="./pattern-Graph 3.patt" id="marker3">
-      <a-entity geometry="primitive: box" material="shader: html; target: #myPlot"></a-entity>
+      <a-entity geometry="primitive: box" material="shader: html; target: #myPlot2"></a-entity>
       <a-entity geometry="primitive: box" material="shader: html; target: #caption" position="0 0.5 0"></a-entity>
     </a-marker>
     
@@ -21,7 +21,7 @@
   <div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: -2; overflow: hidden">
     <!--<div id="htmlElement" style="background: #F8F8F8; color: #333; font-size: 48px">Hello, HTML!</div>-->
     <div id="caption" style="background: #F8F8F8; color: #333; font-size: 48px">Graph caption</div>
-    <svg id="myPlot" style="width:500px;height:500px"></svg>
+    <div id="myPlot2"><svg id="myPlot" style="background: #F8F8F8;width:500px;height:500px"></svg></div>
   </div>
   
   <script>
