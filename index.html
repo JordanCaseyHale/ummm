@@ -4,12 +4,13 @@
   <title>My A-Frame Scene</title>
   <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
+  <!--<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>-->
+  <script src="https://github.com/Zipexpo/aframe-html-shader/blob/6a1a54f1f4e1f36ec3ffaa3c1120e720d0cece33/dist/aframe-html-shader.min.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <body style="margin:0px; overflow:hidden;">
-  <a-scene embedded arjs="trackingMethod: best;" renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" id="scene">
+  <a-scene embedded arjs="trackingMethod: best;" renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" id="scene" data-html2canvas-ignore="true">
     <a-marker type="pattern" url="./pattern-Graph 3.patt" id="marker3">
       <a-entity geometry="primitive: box" material="shader: html; target: #myPlot2"></a-entity>
       <a-entity geometry="primitive: box" material="shader: html; target: #caption" position="0 0.5 0"></a-entity>
@@ -21,7 +22,7 @@
   <div style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: -2; overflow: hidden">
     <!--<div id="htmlElement" style="background: #F8F8F8; color: #333; font-size: 48px">Hello, HTML!</div>-->
     <div id="caption" style="background: #F8F8F8; color: #333; font-size: 48px">Graph caption</div>
-    <div id="myPlot2"><svg id="myPlot" style="background: #F8F8F8;width:500px;height:500px"></svg></div>
+    <svg id="myPlot" style="background: #F8F8F8;width:500;height:500"></svg>
   </div>
   
   <script>
